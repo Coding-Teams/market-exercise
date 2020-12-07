@@ -1,6 +1,6 @@
 /*
  * spicoli piersilvio
- * università degli studi di bari - Aldo Moro
+ * universitÃ  degli studi di bari - Aldo Moro
  * dip. Informatica
  *
  * 06 / 12 / 2020
@@ -34,10 +34,9 @@ _Bool flagControl;
 int n_sup = 0;
 
 //function's declaration
-void insert();
 void searchManager();
 void searchCity();
-
+void searchMax();
 
 int main(){
 
@@ -77,7 +76,8 @@ int main(){
 			printf("\n");
 			printf("1 - :: search the manager and print the data \n");
 			printf("2 - :: search the city and print the market inside \n");
-			printf("3 - :: exit to the progam \n");
+			printf("3 - :: print the market with max employes \n");
+			printf("4 - :: exit to the progam \n");
 			printf("\n");
 			printf(":: choise -> ");
 			scanf("%d", &choise);
@@ -90,9 +90,12 @@ int main(){
 				case 2:
 						searchCity();
 				break;
+				case 3:
+					searchMax();
+				break;
 			}
 
-	}while(choise != 3);
+	}while(choise != 4);
 
 	system("pause");
 	return 0;
@@ -120,7 +123,7 @@ void searchManager(){
 			printf(":: address city of market: %s \n", sup[i].indirizzo);
 			printf(":: city of the market: %s \n", sup[i].citta);
 			printf(":: number of employes of the market: %d \n", sup[i].num_dip);
-			printf(":: revenue of the market: %f \n", sup[i].fatturato);
+			printf(":: revenue of the market: %.2f $\n", sup[i].fatturato);
 		}
 	}
 
@@ -152,4 +155,30 @@ void searchCity(){
 
 		if(!flag)
 			printf(":: search failled! \n");
+}
+
+void searchMax(){
+
+	//local variables
+	int pos = 0;
+	int maximNumb = 0;
+
+	for(i = 0; i < n_sup; i++){
+
+		if(sup[i].num_dip > maximNumb){
+			pos = i;
+			maximNumb = sup[i].num_dip;
+		}
+	}
+
+	printf(":: here's the market with a max employes \n");
+	printf("\n");
+	printf(":: id: %s \n", sup[pos].id);
+	printf(":: name manager: %s \n", sup[pos].nome_resp);
+	printf(":: second name manager: %s \n", sup[pos].cognome_resp);
+	printf(":: address city of market: %s \n", sup[pos].indirizzo);
+	printf(":: city of the market: %s \n", sup[pos].citta);
+	printf(":: number of employes of the market: %d \n", sup[pos].num_dip);
+	printf(":: revenue of the market: %.2f $\n", sup[pos].fatturato);
+
 }
